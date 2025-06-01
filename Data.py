@@ -427,10 +427,10 @@ sekundäre_faktoren = [
         "category": "sekundäre Kriterien",
     },
     {
-        "name": "Preis",
+        "name": "Preisgestaltung",
         "description": "Wie ergeben sich die Kosten?",
         "options": [
-            "Komplett Kostenlos",
+            "Agent sowie Model (lokal) komplett kostenlos",
             "Agent kostenlos, nur Zahlung nach API Key Nutzung",
             "Festgelegter Preis pro Monat (inkl. Agent und API Key Nutzung).",
         ],

@@ -422,9 +422,28 @@ def create_excel_table(
 
     # Leerzeile + Preis
     last_row = ws.max_row + 2
-    ws.cell(row=last_row, column=1, value="Preis")
-    ws.cell(row=last_row, column=2, value=sekundäre_kriterien_werte1["werte"][-1])
-    ws.cell(row=last_row, column=3, value=sekundäre_kriterien_werte2["werte"][-1])
+    ws.cell(row=last_row, column=1, value="Preisgestaltung")
+    ws.cell(
+        row=last_row,
+        column=2,
+        value=get_price_description(sekundäre_kriterien_werte1["werte"][-1]),
+    )
+    ws.cell(
+        row=last_row,
+        column=3,
+        value=get_price_description(sekundäre_kriterien_werte2["werte"][-1]),
+    )
 
     wb.save(excel_filename)
     print(f"\n✅ Excel-Datei gespeichert als '{excel_filename}'")
+
+
+def get_price_description(rating):
+    if rating == 1:
+        return "Agent sowie Model (lokal) komplett kostenlos"
+    elif rating == 0.5:
+        return "Agent kostenlos, nur Zahlung nach API Key Nutzung"
+    elif rating == 0:
+        return "Festgelegter Preis pro Monat (inkl. Agent und API Key Nutzung)."
+    else:
+        return "Keine Angabe"
