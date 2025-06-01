@@ -46,6 +46,12 @@ code_kriterien_mittelwerte = {
     "Code Maintainability": {"category": "Code Kriterium", "score": 2.0},
 }
 
+sekundäre_kriterien_werte = {
+    "kriterium_name": ["Verständlichkeit", "Preis"],
+    "werte": [1.0, 0.5],
+}
+
+
 kriterien_textantworten2 = {
     "Dependency-Handling": "Ist nicht in der Lage fehlende Libraries zu installieren.",
     "Input-/Output-Simulation": "Kann keinen Dummy-Input erzeugen.",
@@ -92,13 +98,21 @@ code_kriterien_mittelwerte2 = {
     "Code Maintainability": {"category": "Code Kriterium", "score": 2.0},
 }
 
+sekundäre_kriterien_werte2 = {
+    "kriterium_name": ["Verständlichkeit", "Preis"],
+    "werte": [1.0, 0.5],
+}
+
+
 create_excel_table(
     kriterien_textantworten,
     agenten_slug,
     extra_prompts_gesamt,
     code_kriterien_mittelwerte,
+    sekundäre_kriterien_werte,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2,
     code_kriterien_mittelwerte2,
+    sekundäre_kriterien_werte2,
 )

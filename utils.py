@@ -223,8 +223,7 @@ def process_bewertungen(
             wert = sum(werte) / len(werte) if werte else 0
             agenten_werte.append(wert)
 
-    # Autonomie Radar
-
+    # Autonomie
     for cat in autonomie_quellen:
         werte = kriterien_mittelwerte_per_katergorie.get(cat, [])
         wert = sum(werte) / len(werte) if werte else 0
@@ -358,10 +357,12 @@ def create_excel_table(
     agenten_slug1,
     extra_prompts_gesamt1,
     code_kriterien_mittelwerte1,
+    sekundäre_kriterien_werte1,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2,
     code_kriterien_mittelwerte2,
+    sekundäre_kriterien_werte2,
 ):
     # --- Falls Slugs gleich sind, umbenennen zur Sicherheit ---
     if agenten_slug1 == agenten_slug2:
@@ -377,7 +378,7 @@ def create_excel_table(
     )
     df = pd.merge(df1, df2, on="Kriterium", how="outer")
 
-    # --- Code-Kriterien vorbereiten ---
+    # Speichert alle Kritieren der beiden Dicts in einem Set um alle möglichen Kriterien zu speichern
     alle_kriterien = set(code_kriterien_mittelwerte1.keys()) | set(
         code_kriterien_mittelwerte2.keys()
     )
@@ -418,6 +419,12 @@ def create_excel_table(
     ws.cell(row=last_row, column=1, value="Anzahl benötigter extra Prompts")
     ws.cell(row=last_row, column=2, value=extra_prompts_gesamt1)
     ws.cell(row=last_row, column=3, value=extra_prompts_gesamt2)
+
+    # Leerzeile + Preis
+    last_row = ws.max_row + 2
+    ws.cell(row=last_row, column=1, value="Preis")
+    ws.cell(row=last_row, column=2, value=sekundäre_kriterien_werte1["werte"][-1])
+    ws.cell(row=last_row, column=3, value=sekundäre_kriterien_werte2["werte"][-1])
 
     wb.save(excel_filename)
     print(f"\n✅ Excel-Datei gespeichert als '{excel_filename}'")

@@ -95,9 +95,11 @@ zeichne_radar(
 )
 zeichne_radar(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
-    sekundäre_kriterien_werte["kriterium_name"],
-    sekundäre_kriterien_werte["werte"],
-    sekundäre_kriterien_werte2["werte"],
+    sekundäre_kriterien_werte[
+        "kriterium_name"
+    ].pop(),  # Hier .pop() damit Preis nicht in dem Radar mit drinnen ist.
+    sekundäre_kriterien_werte["werte"].pop(),
+    sekundäre_kriterien_werte2["werte"].pop(),
     f"{agentenname}",
     f"{agentenname2}",
     datei_sek_kriterien,
@@ -112,10 +114,12 @@ create_excel_table(
     agenten_slug,
     extra_prompts_gesamt,
     code_kriterien_mittelwerte,
+    sekundäre_kriterien_werte,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2,
     code_kriterien_mittelwerte2,
+    sekundäre_kriterien_werte2,
 )
 
 

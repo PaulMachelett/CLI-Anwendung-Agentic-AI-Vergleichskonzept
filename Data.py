@@ -420,9 +420,19 @@ sekundäre_faktoren = [
         "name": "AI Auswahl",
         "description": "Welche Auswahlmöglichkeiten hat man bei der Wahl der AI? Welche Modelle? Nur Cloud oder auch lokal?",
         "options": [
-            "Breite Auswahl an Modellen, Anbietern, Cloud sowie Lokal",
-            "cAuswahl an Cloud AI Modellen und Anbietern",
-            "Beschränkt auf eine einen mit Cloud Modellen",
+            "Breite Auswahl an Modellen und Anbietern; Cloudbasiert sowie Lokal",
+            "Auswahl an Cloud AI Modellen und Anbietern",
+            "Beschränkt auf einen Anbieter mit Cloud Modellen",
+        ],
+        "category": "sekundäre Kriterien",
+    },
+    {
+        "name": "Preis",
+        "description": "Wie ergeben sich die Kosten?",
+        "options": [
+            "Komplett Kostenlos",
+            "Agent kostenlos, nur Zahlung nach API Key Nutzung",
+            "Festgelegter Preis pro Monat (inkl. Agent und API Key Nutzung).",
         ],
         "category": "sekundäre Kriterien",
     },
