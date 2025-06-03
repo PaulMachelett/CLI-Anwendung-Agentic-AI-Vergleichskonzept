@@ -311,7 +311,7 @@ always_asked_criteria = [
             "Hat die Bearbeitung mit ausführbarem Code abgeschlossen",
             "Hat die Bearbeitung mit nicht lauffähigen Code beendet.",
         ],
-        "category": "Code Kriterium",
+        "category": "Coding Practices",
     },
     {
         "name": "Anforderungserfüllung",
@@ -320,7 +320,7 @@ always_asked_criteria = [
             "Hat Prompt vollständig umgesetzt",
             "Hat Prompt unvollständig umgesetzt.",
         ],
-        "category": "Code Kriterium",
+        "category": "Coding Practices",
     },
     {
         "name": "Fehlerbehebungskompetenz",
@@ -343,24 +343,6 @@ always_asked_criteria = [
     },
 ]
 
-# --- Neue Code-Kriterien einmalig abfragen ---
-code_kriterien_einmalig = [
-    {
-        "name": "Code Security",
-        "description": "Überprüft die Anzahl der gefundenen Sicherheitslücken.",
-        "category": "Code Kriterium",
-    },
-    {
-        "name": "Code Reliability",
-        "description": "Überprüft, wie viele Bugs innerhalb des Codes vorhanden sind.",
-        "category": "Code Kriterium",
-    },
-    {
-        "name": "Code Maintainability",
-        "description": "Untersucht, wie gut sich der erzeugte Code verstehen, erweitern und pflegen lässt.",
-        "category": "Code Kriterium",
-    },
-]
 
 sekundäre_faktoren = [
     {

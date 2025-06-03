@@ -7,7 +7,6 @@ from Data import (
     always_asked_criteria,
     prompts,
     sekundäre_faktoren,
-    code_kriterien_einmalig,
     autonomie_quellen,
     agenten_kategorien,
 )
@@ -182,13 +181,6 @@ def process_bewertungen(
             kriterium_bewertungen[key].append(criterion["score"])
             kriterium_name_kategorie_map[key] = criterion["category"]
 
-    print("\n\n\nBewertung der SonarQube Kriterien:")
-
-    # Speichert alle "Code Kriterium" Kritieren in code_kriterien_mittelwerte
-    input_and_process_code_kriterien(
-        code_kriterien_mittelwerte, kriterium_bewertungen, kriterium_name_kategorie_map
-    )
-
     # --- Fragt sekunäre Kriterien ab und speichert diese in "sekundäre_kriterien_werte"
     input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren)
 
@@ -228,55 +220,6 @@ def process_bewertungen(
         werte = kriterien_mittelwerte_per_katergorie.get(cat, [])
         wert = sum(werte) / len(werte) if werte else 0
         autonomie_detail_werte.append(wert)
-
-
-def input_and_process_code_kriterien(
-    code_kriterien_mittelwerte, kriterium_bewertungen, kriterium_name_kategorie_map
-):
-    code_kriterien_bewertungen = {}
-
-    # Frägt SonarQube Kriterien ab und speichert diese unter "code_kriterien_bewertungen"
-    input_code_kriterien(code_kriterien_bewertungen)
-
-    # Hier werden die Mittelwerte der "Code Kriterium" Kriterien berechnet
-    for criterion_name, scores in kriterium_bewertungen.items():
-        if kriterium_name_kategorie_map[criterion_name] == "Code Kriterium":
-            mean_score = sum(scores) / len(scores)
-            code_kriterien_mittelwerte[criterion_name] = {
-                "category": "Code Kriterium",
-                "score": mean_score,
-            }
-
-    # --- Ergänze "Code_Kriterium" Mittelwerte mit SonarQube Eingaben ---
-    code_kriterien_mittelwerte.update(code_kriterien_bewertungen)
-
-
-def input_code_kriterien(code_kriterien_bewertungen):
-    for criterion in code_kriterien_einmalig:
-        while True:
-            try:
-                print(f"\n{criterion['name']}: {criterion['description']}")
-                value = float(input("Bitte Zahl eingeben: "))
-                if value >= 0:
-                    code_kriterien_bewertungen[criterion["name"]] = {
-                        "category": criterion["category"],
-                        "score": value,
-                    }
-                    break
-                else:
-                    print("Bitte eine positive Zahl eingeben.")
-            except ValueError:
-                print("Ungültige Eingabe. Bitte eine gültige Zahl eingeben.")
-
-
-def print_code_kriterien_bewertungen(code_kriterien_mittelwerte):
-    print("\n\n\n#### Bewertungen Kriterien der Kategorie 'Code Kriterium': ####")
-
-    for name, info in code_kriterien_mittelwerte.items():
-        if name in ["Code Security", "Code Reliability", "Code Maintainability"]:
-            print(f"- {name}: {int(info['score'])} SonarQube Meldung")
-        else:
-            print(f"- {name}: {int(info['score'] * 100)} % der Fälle")
 
 
 def input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren):
@@ -356,12 +299,10 @@ def create_excel_table(
     kriterien_textantworten1,
     agenten_slug1,
     extra_prompts_gesamt1,
-    code_kriterien_mittelwerte1,
     sekundäre_kriterien_werte1,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2,
-    code_kriterien_mittelwerte2,
     sekundäre_kriterien_werte2,
 ):
     # --- Falls Slugs gleich sind, umbenennen zur Sicherheit ---
@@ -378,28 +319,13 @@ def create_excel_table(
     )
     df = pd.merge(df1, df2, on="Kriterium", how="outer")
 
-    # Speichert alle Kritieren der beiden Dicts in einem Set um alle möglichen Kriterien zu speichern
-    alle_kriterien = set(code_kriterien_mittelwerte1.keys()) | set(
-        code_kriterien_mittelwerte2.keys()
-    )
-    code_kriterien_rows = []
-
-    for kriterium in sorted(alle_kriterien):
-        score1 = code_kriterien_mittelwerte1.get(kriterium, {}).get("score", "")
-        score2 = code_kriterien_mittelwerte2.get(kriterium, {}).get("score", "")
-        code_kriterien_rows.append(
-            {"Kriterium": kriterium, agenten_slug1: score1, agenten_slug2: score2}
-        )
-
-    df_code = pd.DataFrame(code_kriterien_rows)
-
     # --- Leerzeile vorbereiten ---
     df_empty = pd.DataFrame(
         columns=["Kriterium", agenten_slug1, agenten_slug2], data=[["", "", ""]]
     )
 
     # --- Alle Abschnitte zusammenführen ---
-    df_final = pd.concat([df, df_empty, df_code], ignore_index=True)
+    df_final = pd.concat([df, df_empty], ignore_index=True)
 
     # --- Excel-Datei schreiben ---
     excel_filename = f"{agenten_slug1}_vs_{agenten_slug2}_kriterien_inkl_code.xlsx"
