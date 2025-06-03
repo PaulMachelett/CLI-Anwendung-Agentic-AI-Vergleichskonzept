@@ -97,9 +97,9 @@ zeichne_radar(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
     sekundäre_kriterien_werte[
         "kriterium_name"
-    ].pop(),  # Hier .pop() damit Preis nicht in dem Radar mit drinnen ist.
-    sekundäre_kriterien_werte["werte"].pop(),
-    sekundäre_kriterien_werte2["werte"].pop(),
+    ][:-1],  # Hier .pop() damit Preis nicht in dem Radar mit drinnen ist.
+    sekundäre_kriterien_werte["werte"][:-1],
+    sekundäre_kriterien_werte2["werte"][:-1],
     f"{agentenname}",
     f"{agentenname2}",
     datei_sek_kriterien,

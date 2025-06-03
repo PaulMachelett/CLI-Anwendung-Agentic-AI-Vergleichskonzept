@@ -30,23 +30,6 @@ def bewertungs_prozess(
         print(f"\n{prompt} - Bitte bewerte die folgenden Kriterien:\n")
         results[prompt] = []
 
-        # Frage nach Anzahl extra Prompts – außer bei Agenten Features
-        if prompt != "Agenten Features":
-            while True:
-                try:
-                    anzahl_extra_prompts = int(
-                        input(
-                            "Wie viele extra Prompts wurden benötigt bis der Code vollständig war und funktionierte? "
-                        )
-                    )
-                    if anzahl_extra_prompts >= 0:
-                        extra_prompts_gesamt += anzahl_extra_prompts
-                        break
-                    else:
-                        print("Bitte eine nicht-negative Zahl eingeben.")
-                except ValueError:
-                    print("Ungültige Eingabe. Bitte eine Zahl eingeben.")
-
         # Normale Kriterien
         for idx, criterion in enumerate(criteria):
             print("\n" + "#" * 30 + "\n")
@@ -88,6 +71,23 @@ def bewertungs_prozess(
 
             if criterion["name"] not in kriterien_textantworten:
                 kriterien_textantworten[criterion["name"]] = bewertungstext
+
+        # Frage nach Anzahl extra Prompts – außer bei Agenten Features
+        if prompt != "Agenten Features":
+            while True:
+                try:
+                    anzahl_extra_prompts = int(
+                        input(
+                            "Wie viele extra Prompts wurden benötigt bis der Code vollständig war und funktionierte? "
+                        )
+                    )
+                    if anzahl_extra_prompts >= 0:
+                        extra_prompts_gesamt += anzahl_extra_prompts
+                        break
+                    else:
+                        print("Bitte eine nicht-negative Zahl eingeben.")
+                except ValueError:
+                    print("Ungültige Eingabe. Bitte eine Zahl eingeben.")
 
         # 👇 Hier: Nur wenn NICHT "Agenten Features" → Immer-gefragt-Kriterien abfragen
         if prompt != "Agenten Features":

@@ -5,7 +5,7 @@ prompts = {
             "description": "Installiert der Agent eigenständig fehlende Libraries?",
             "options": [
                 "Installiert fehlende Libraries",
-                "Ist nicht in der Lage fehlende Libraries zu installieren.",
+                "Installiert fehlende Libaries nicht.",
             ],
             "category": "Pro-Aktivität",
         },
@@ -22,7 +22,7 @@ prompts = {
             "name": "Modularitätserstellung",
             "description": "Hat der Agent Code- oder Datei-Einheiten als funktionale Module behandelt und sie sinnvoll getrennt?",
             "options": [
-                "Hat automatische Projektstruktur erstellt",
+                "Hat automatisch Projektstruktur erstellt",
                 "Hat Teils der Modularität ausgelagert.",
                 "Hat komplette Logik in einem File verpackt.",
             ],
@@ -305,6 +305,24 @@ prompts = {
 # Immer abzufragende Kriterien
 always_asked_criteria = [
     {
+        "name": "Ausführbarer Code",
+        "description": "Hat der Agent seine Bearbeitung mit funktionierendem Code abgeschlossen?",
+        "options": [
+            "Hat die Bearbeitung mit ausführbarem Code abgeschlossen",
+            "Hat die Bearbeitung mit nicht lauffähigen Code beendet.",
+        ],
+        "category": "Code Kriterium",
+    },
+    {
+        "name": "Anforderungserfüllung",
+        "description": "Hat der Agent alle seine Anforderungen aus dem Prompt umgesetzt (egal ob der Code funktioniert oder nicht)?",
+        "options": [
+            "Hat Prompt vollständig umgesetzt",
+            "Hat Prompt unvollständig umgesetzt.",
+        ],
+        "category": "Code Kriterium",
+    },
+    {
         "name": "Fehlerbehebungskompetenz",
         "description": "Hat der Agent es geschafft einen auftretenden Fehler mit zusätzlichen Prompts (max. 3) zu beheben?",
         "options": [
@@ -322,24 +340,6 @@ always_asked_criteria = [
             "Probiert ursprüngliche Strategie und verfängt sich in Verhaltensloops wenn diese nicht funktioniert.",
         ],
         "category": "Pro-Aktivität",
-    },
-    {
-        "name": "Anforderungserfüllung",
-        "description": "Hat der Agent alle seine Anforderungen aus dem Prompt umgesetzt (egal ob der Code funktioniert oder nicht)?",
-        "options": [
-            "Hat Prompt vollständig umgesetzt",
-            "Hat Prompt unvollständig umgesetzt.",
-        ],
-        "category": "Code Kriterium",
-    },
-    {
-        "name": "Ausführbarer Code",
-        "description": "Hat der Agent seine Bearbeitung mit funktionierendem Code abgeschlossen?",
-        "options": [
-            "Hat die Bearbeitung mit ausführbarem Code abgeschlossen",
-            "Hat die Bearbeitung mit nicht lauffähigen Code beendet.",
-        ],
-        "category": "Code Kriterium",
     },
 ]
 
