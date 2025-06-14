@@ -126,7 +126,7 @@ prompts = {
     ],
     "Code Wiederverwendung": [
         {
-            "name": "Code Reuse",
+            "name": "Code Wiederverwendung",
             "description": "Hat der Agent vorhandene Logik wiederverwendet?",
             "options": [
                 "Hat Code wiederverwendet.",
@@ -239,17 +239,6 @@ prompts = {
             "category": "Kommunikation",
         },
     ],
-    "Lernfähigkeit": [
-        {
-            "name": "Lernfähigkeit",
-            "description": "Lernt der Agent aus Fehlern? Konkret: Agenten eine Aufgabe geben, ihm anschließend Feedback dazu geben, den Code der vorherigen Aufgabe löschen und anschließend ihm die gleiche Aufgabe erneut geben. Wenn er dann das User Feedback berücksichtigt, hat er gelernt.",
-            "options": [
-                "Hat aus seinen Fehler gelernt und den Fehler bei gleicher Aufgabenstellung nicht nochmal gemacht.",
-                "Hat gleichen Fehler bei gleicher Aufgabe erneut gemacht.",
-            ],
-            "category": "Lernfähigkeit",
-        }
-    ],
     "Agenten Features": [
         {
             "name": "Konsolenzugriff",
@@ -272,7 +261,7 @@ prompts = {
             "category": "Pro-Aktivität",
         },
         {
-            "name": "Dokumentation & Developer Experience",
+            "name": "Dokumentation",
             "description": "Hat der Agent Dokumentation, Docstrings, README-Dateien oder API-Beschreibungen erstellt?",
             "options": [
                 "Hat Dokumentation, Docstrings, README-Dateien und API-Beschreibungen erstellt.",
@@ -436,3 +425,32 @@ autonomie_quellen = [
     "Reflexion",
     "Tool-Usage",
 ]
+
+prompt_mapping = {
+    "Initialle Erstellung des Web-Backends": "Prompt1",
+    "Datenbanklogik": "Prompt2",
+    "Projektstruktur erstellen": "Prompt3",
+    "Tests erstellen": "Prompt4",
+    "Manuelle Änderungen des Codes": "Prompt 5",
+    "Code Wiederverwendung": "Prompt 6",
+    "Refactoring": "Prompt 7",
+    "Test Benutzung": "Prompt 8",
+    "Kommunikation": "Prompt 9",
+    "Memory": "Prompt 10",
+    "Reflexion": "Prompt 11",
+}
+
+einleitung = """
+####################################
+
+CLI Anwendung: Vergleichskonzept Agentic AI Software Development Plattformen und Frameworks
+
+####################################
+
+Diese CLI Anwendung unterstützt die Durchführung des Vergleichkonzeptes für Agentic AI Software Development Plattformen und Frameworks.
+Sie wurde im Rahmen der Bachelorarbeit:
+
+    "Entwicklung eines Vergleichkonzeptes für Agentic AI Software Development Plattformen und Frameworks" von Paul Machelett entwickelt.
+
+Bitte geben Sie nun um mit dem Vergleich anzufangen, die Namen der beiden Agentic AI Systeme ein, die verglichen werden:\n
+"""

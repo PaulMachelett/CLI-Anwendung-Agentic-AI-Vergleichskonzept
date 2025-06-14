@@ -9,7 +9,9 @@ from Data import (
     sekundäre_faktoren,
     autonomie_quellen,
     agenten_kategorien,
+    prompt_mapping,
 )
+from Prompts import prompts_text
 
 
 def bewertungs_prozess(
@@ -25,13 +27,18 @@ def bewertungs_prozess(
 
     print(f"\nBewertung des Agenten: {agentenname}\n")
 
-    for prompt, criteria in prompts.items():
-        print(f"\n{prompt} - Bitte bewerte die folgenden Kriterien:\n")
-        results[prompt] = []
+    for prompt_key, criteria in prompts.items():
+        prompt_text_key = prompt_mapping.get(prompt_key)
+        prompt_text = prompts_text.get(prompt_text_key, "")
+
+        print(f"\nBeschreibung für: {prompt_key}\n\n\n{prompt_text.strip()}\n")
+        print(f"\nBitte bewerte die folgenden Kriterien:\n")
+
+        results[prompt_key] = []
 
         # Normale Kriterien
         for idx, criterion in enumerate(criteria):
-            print("\n" + "#" * 30 + "\n")
+            # print("\n" + "#" * 30 + "\n")
             print(f"Kriterium {idx + 1}: {criterion['name']}")
             print(f"Beschreibung: {criterion['description']}")
             for i, option in enumerate(criterion["options"], 1):
@@ -60,7 +67,7 @@ def bewertungs_prozess(
                 except ValueError:
                     print("Bitte eine gültige Zahl eingeben.")
 
-            results[prompt].append(
+            results[prompt_key].append(
                 {
                     "name": criterion["name"],
                     "category": criterion["category"],
@@ -72,7 +79,7 @@ def bewertungs_prozess(
                 kriterien_textantworten[criterion["name"]] = bewertungstext
 
         # Frage nach Anzahl extra Prompts – außer bei Agenten Features
-        if prompt != "Agenten Features":
+        if prompt_key != "Agenten Features":
             while True:
                 try:
                     anzahl_extra_prompts = int(
@@ -89,7 +96,7 @@ def bewertungs_prozess(
                     print("Ungültige Eingabe. Bitte eine Zahl eingeben.")
 
         # 👇 Hier: Nur wenn NICHT "Agenten Features" → Immer-gefragt-Kriterien abfragen
-        if prompt != "Agenten Features":
+        if prompt_key != "Agenten Features":
             for idx, criterion in enumerate(always_asked_criteria):
                 print("\n" + "#" * 30 + "\n")
                 print(f"(Immer gefragt) Kriterium {idx + 1}: {criterion['name']}")
@@ -123,7 +130,7 @@ def bewertungs_prozess(
                         print("Bitte eine gültige Zahl eingeben.")
 
                 if score is not None:
-                    results[prompt].append(
+                    results[prompt_key].append(
                         {
                             "name": criterion["name"],
                             "category": criterion["category"],

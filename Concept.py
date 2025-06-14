@@ -1,12 +1,13 @@
 import sys
 from collections import defaultdict
-from Data import agenten_kategorien, autonomie_quellen
+from Data import agenten_kategorien, autonomie_quellen, einleitung
 from utils import (
     zeichne_radar,
     bewertungs_prozess,
     create_excel_table,
 )
 
+print(einleitung)
 
 # Agentenname eingeben
 agentenname = input("Bitte gib den Namen des erste Agenten ein: ").strip()
