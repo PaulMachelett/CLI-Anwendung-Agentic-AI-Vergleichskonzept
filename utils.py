@@ -302,6 +302,44 @@ def zeichne_radar(titel, kategorien, werte1, werte2, label1, label2, dateiname):
     plt.close()
 
 
+def zeichne_balkendiagramm(
+    titel, kategorien, werte1, werte2, label1, label2, dateiname
+):
+    x = np.arange(len(kategorien))
+    breite = 0.35
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    balken1 = ax.bar(x - breite / 2, werte1, breite, label=label1)
+    balken2 = ax.bar(x + breite / 2, werte2, breite, label=label2)
+
+    ax.set_title(titel, fontsize=14, y=1.05)
+    ax.set_xlabel("Kategorien")
+    ax.set_ylabel("Werte")
+    ax.set_xticks(x)
+    ax.set_xticklabels(
+        kategorien, rotation=45, ha="right"
+    )  # ⬅️ Rotation hilft gegen Überlappung
+    ax.set_ylim(0, 1)
+    ax.legend()
+
+    for bars in [balken1, balken2]:
+        for bar in bars:
+            yval = bar.get_height()
+            ax.text(
+                bar.get_x() + bar.get_width() / 2,
+                yval + 0.02,
+                f"{yval:.2f}",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+            )
+
+    plt.tight_layout(rect=[0, 0.15, 1, 0.95])  # ⬅️ mehr Platz unten
+    plt.savefig(dateiname)
+    plt.close()
+
+
 def create_excel_table(
     kriterien_textantworten1,
     agenten_slug1,

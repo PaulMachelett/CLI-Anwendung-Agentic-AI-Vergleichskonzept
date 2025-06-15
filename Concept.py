@@ -3,6 +3,7 @@ from collections import defaultdict
 from Data import agenten_kategorien, autonomie_quellen, einleitung
 from utils import (
     zeichne_radar,
+    zeichne_balkendiagramm,
     bewertungs_prozess,
     create_excel_table,
 )
@@ -76,7 +77,7 @@ datei_autonomie = f"{agenten_slug}_autonomie.png"
 datei_sek_kriterien = f"{agenten_slug}_sek_faktoren.png"
 
 # Radar-Grafiken speichern
-zeichne_radar(
+zeichne_balkendiagramm(
     f"{agentenname} & {agentenname2} Eigenschaften",
     agenten_kategorien,
     agenten_werte.copy(),
@@ -85,7 +86,7 @@ zeichne_radar(
     f"{agentenname2}",
     datei_eigenschaften,
 )
-zeichne_radar(
+zeichne_balkendiagramm(
     f"{agentenname} & {agentenname2} Autonomie",
     autonomie_quellen,
     autonomie_detail_werte.copy(),
@@ -94,7 +95,7 @@ zeichne_radar(
     f"{agentenname2}",
     datei_autonomie,
 )
-zeichne_radar(
+zeichne_balkendiagramm(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
     sekundäre_kriterien_werte["kriterium_name"][
         :-1
@@ -126,12 +127,13 @@ print(f"\nkriterien_textantworten: {kriterien_textantworten}")
 print(f"\nagenten_slug: {agenten_slug}")
 print(f"\nextra_prompts_gesamt: {extra_prompts_gesamt}")
 print(f"\ncode_kriterien_mittelwerte: {code_kriterien_mittelwerte}")
-print(f"\nagenten_name: {agentenname}")
+print(f"\nagentenname: {agentenname}")
 print(f"\nsekundäre_kriterien_werte: {sekundäre_kriterien_werte}")
 print(f"\ndatei_sek_kriterien: {datei_sek_kriterien}")
 print(f"\ndatei_autonomie: {datei_autonomie}")
 print(f"\nautonomie_detail_werte: {autonomie_detail_werte}")
 print(f"\ndatei_eigenschaften: {datei_eigenschaften}")
 print(f"\nagenten_werte: {agenten_werte}")
+print(f"\nkategorien: {agenten_kategorien}")
 
 # DIESE MUSS ICH NOCH IN EIN TEST FILE ÜBERFÜHREN, DAMIT ICH DIE SOFTWARE TESTEN KANN

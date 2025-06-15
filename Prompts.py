@@ -10,12 +10,12 @@ prompts_text = {
     4. Es gibt eine Administrator-Funktion, mit der Benutzer gelöscht werden können.
     
     Die Datenbank enthält zwei Tabellen: 
-      1. Tabelle `users` mit den Spalten: - `id` (INTEGER, Primary Key, unique) - `name` (TEXT, unique) - `email` (TEXT, unique) - `admin` (BOOLEAN)  
+      1. Tabelle `users` mit den Spalten: - `id` (INTEGER, Primary Key, unique) - `name` (TEXT, unique) - `email` (TEXT, unique) - `admin` (BOOLEAN)
       2. Tabelle `notes` mit den Spalten: - `id` (INTEGER, Primary Key) - `title` (TEXT) - `content` (TEXT) - `owner_id` (INTEGER, Foreign Key, verweist auf `users.id`)
 
     Implementiere REST-Endpunkte, die JSON-Daten empfangen und zurückgeben. Die Endpunkte sollen alle CRUD-Operationen (Create, Read, Update, Delete) vollständig abbilden. 
     Da keine echte Datenbank angebunden ist, soll die Datenhaltung über einfache Python-Listen erfolgen, die die Inhalte zur Laufzeit speichern. 
-    Fülle diese Listen ebenfalls mit Dummy Daten. Die CRUD-Operationen sollen ihre Funktionalität vollständig auf diesen Listen ausführen
+    Fülle diese Listen ebenfalls mit Dummy Daten. Die CRUD-Operationen sollen ihre Funktionalität vollständig auf diesen Listen ausführen
 
     Unterteile dein Vorgehen dafür in verschiedene Schritte.
 
