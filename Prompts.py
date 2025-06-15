@@ -28,10 +28,12 @@ prompts_text = {
     Dabei sollst du die gesamte Logik so aufbauen, als würdest du mit einer realen SQLite-Datenbank arbeiten – inklusive realistischer SQL-Strukturen, Abfragen und Datenbankmodelle. 
     Die beiden Datenbankmodelle sollen "Note" und "User" genannt werden.
     
-    Wichtig: Da aktuell keine echte SQLite-Datenbank angeschlossen ist, sollst du die Datenbanklogik durch eine eigene Mock-Schicht simulieren, die das Verhalten der echten SQLite-Datenbank vollständig nachbildet. 
+    Wichtig: Da aktuell keine echte SQLite-Datenbank angeschlossen ist, sollst du die Datenbanklogik durch eine eigene Mock-Schicht simulieren, die das Verhalten der 
+    echten SQLite-Datenbank vollständig nachbildet. 
     Innerhalb der Mock Prozesse sollen die Datenbankmodelle mit einbezogen werden.
 
-    Gib mir während der Bearbeitung nach jeder deiner Handlungen ein kleinen Statusbericht, was du als letztes gemacht hat, mache danach aber automatisch weiter ohne auf weiteren Input des Nutzers zu warten.
+    Gib mir während der Bearbeitung nach jeder deiner Handlungen ein kleinen Statusbericht, was du als letztes gemacht hat, mache danach aber automatisch weiter ohne auf weiteren 
+    Input des Nutzers zu warten.
 
     Ich möchte, dass du mir dein Vorgehen sowie die Art deiner Implementierung im Anschluss begründest.
 
