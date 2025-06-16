@@ -109,13 +109,13 @@ prompts = {
     "Manuelle Änderungen des Codes": [
         {
             "name": "Codeänderungserkennung",
-            "description": "Hat der Agent manuelle Änderungen erkannt?",
-            "options": ["Hat Änderungen im Code erkannt.", "Nicht erkannt."],
+            "description": "Konnte der Agent mit manuellen Codeänderungen umgehen?",
+            "options": ["Ja", "Nein"],
             "category": "Reaktivität",
         },
         {
             "name": "Strukturänderungserkennung",
-            "description": "Konnte der Agent mit den strukturellen Änderungen umgehen und die Importe anpassen?",
+            "description": "Konnte der Agent mit den strukturellen Änderungen umgehen?",
             "options": [
                 "Konnte strukturelle Änderungen erkennen und Code daran anpassen.",
                 "Konnte Änderungen erkennen aber den Code nicht daran anpassen.",
@@ -166,10 +166,9 @@ prompts = {
         },
         {
             "name": "Testanpassung",
-            "description": "Hat der Agent Tests an geänderten Code angepasst?",
+            "description": "Hat der Agent ebenfalls Tests an geänderten Code angepasst?",
             "options": [
                 "Automatisch angepasst",
-                "Nach Testfehlschlag angepasst",
                 "Nicht angepasst",
             ],
             "category": "Pro-Aktivität",
@@ -200,7 +199,7 @@ prompts = {
         },
         {
             "name": "Lernfähigkeit aus User Feedback",
-            "description": "Hat der Agent aus Feedback gelernt? (Kommentare auf Deutsch?)",
+            "description": "Hat der Agent aus Feedback gelernt? (Kommentare auf Deutsch oder Französisch?)",
             "options": ["Ja", "Nein"],
             "category": "Lernfähigkeit",
         },
@@ -279,7 +278,10 @@ prompts = {
         {
             "name": "User Interface",
             "description": "Hat der Coding Agent ein User Interface oder muss er in der Konsole bedient werden?",
-            "options": ["Besitzt ein Interface", "Nur Zugriff über Konsole"],
+            "options": [
+                "Besitzt ein Interface, Online oder innerhalb einer IDE",
+                "Nur Zugriff",
+            ],
             "category": "Systemintegration",
         },
         {
@@ -313,7 +315,7 @@ always_asked_criteria = [
     },
     {
         "name": "Fehlerbehebungskompetenz",
-        "description": "Hat der Agent es geschafft einen auftretenden Fehler oder die fehlenden Anforderungen mit zusätzlichen Prompts (max. 3) zu beheben?",
+        "description": "Hat der Agent es geschafft einen auftretenden Fehler oder die fehlenden Anforderungen (mit zusätzlichen Prompts (max. 3)) zu beheben?",
         "options": [
             "Konnte den auftretenden Fehler korrigieren oder Anforderungen umsetzten.",
             "Hat es nicht geschafft einen auftretenden Fehler zu korrigieren oder Anforderungen umzusetzten..",
@@ -382,12 +384,6 @@ sekundäre_faktoren = [
         "category": "sekundäre Kriterien",
     },
     {
-        "name": "Open Source/ Closed Source",
-        "description": "Handelt es sich bei der Software um open oder closed Software?",
-        "options": ["open source", "closed source"],
-        "category": "sekundäre Kriterien",
-    },
-    {
         "name": "AI Auswahl",
         "description": "Welche Auswahlmöglichkeiten hat man bei der Wahl der AI? Welche Modelle? Nur Cloud oder auch lokal?",
         "options": [
@@ -395,6 +391,12 @@ sekundäre_faktoren = [
             "Auswahl an Cloud AI Modellen und Anbietern",
             "Beschränkt auf einen Anbieter mit Cloud Modellen",
         ],
+        "category": "sekundäre Kriterien",
+    },
+    {
+        "name": "Open Source/ Closed Source",
+        "description": "Handelt es sich bei der Software um open oder closed Software?",
+        "options": ["open source", "closed source"],
         "category": "sekundäre Kriterien",
     },
     {

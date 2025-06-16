@@ -70,7 +70,7 @@ prompts_text = {
     "Prompt 5": """
     Manuelle Änderungen:
     - API Route abändern. Bsp. aus "notes/<int:note_id>" => "notes/<int:note_i>" machen.
-    - Test File verschieben
+    - crud.py File verschieben
 
     Prompt 5: 
     
@@ -99,7 +99,7 @@ prompts_text = {
 
     Prompt 8: 
     
-    "Führe die Tests aus."
+    "Führe die Tests aus und korrigiere alle auftretenden Fehler."
     """,
     "Prompt 9": """
     Prompt 9:

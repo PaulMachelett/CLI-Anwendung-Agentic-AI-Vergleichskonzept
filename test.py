@@ -56,11 +56,11 @@ sekundäre_kriterien_werte = defaultdict(
             "Support",
             "Individualisierungsmöglichkeiten",
             "Community und Inhalte",
-            "Open Source/ Closed Source",
             "AI Auswahl",
+            "Open Source/ Closed Source",
             "Preisgestaltung",
         ],
-        "werte": [0.66, 0.5, 0.0, 0.5, 0.5, 0.0, 0.5, 0.5],
+        "werte": [0.66, 0.5, 0.0, 0.5, 0.5, 0.5, 0.0, 0.5],
     },
 )
 
@@ -120,11 +120,6 @@ agenten_slug2 = "aider"
 
 extra_prompts_gesamt2 = 1
 
-sekundäre_kriterien_werte2 = {
-    "kriterium_name": ["Verständlichkeit", "Preis"],
-    "werte": [1.0, 0.5],
-}
-
 agentenname2 = "Agent2"
 
 sekundäre_kriterien_werte2 = defaultdict(
@@ -136,11 +131,11 @@ sekundäre_kriterien_werte2 = defaultdict(
             "Support",
             "Individualisierungsmöglichkeiten",
             "Community und Inhalte",
-            "Open Source/ Closed Source",
             "AI Auswahl",
+            "Open Source/ Closed Source",
             "Preisgestaltung",
         ],
-        "werte": [0.66, 0.5, 0.0, 0.5, 0.5, 0.0, 0.5, 0.5],
+        "werte": [0.66, 0.5, 0.0, 0.5, 0.5, 0.0, 1.0, 0.5],
     },
 )
 
@@ -176,10 +171,10 @@ zeichne_balkendiagramm(
 zeichne_balkendiagramm(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
     sekundäre_kriterien_werte["kriterium_name"][
-        :-1
+        :-2
     ],  # Hier .pop() damit Preis nicht in dem Radar mit drinnen ist.
-    sekundäre_kriterien_werte["werte"][:-1],
-    sekundäre_kriterien_werte2["werte"][:-1],
+    sekundäre_kriterien_werte["werte"][:-2],
+    sekundäre_kriterien_werte2["werte"][:-2],
     f"{agentenname}",
     f"{agentenname2}",
     datei_sek_kriterien,

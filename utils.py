@@ -191,7 +191,7 @@ def process_bewertungen(
     # --- Fragt sekunäre Kriterien ab und speichert diese in "sekundäre_kriterien_werte"
     input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren)
 
-    # Kategorie-Mittelwerte berechnen (ohne "Code Kriterium")
+    # Kategorie-Mittelwerte berechnen
     for criterion_name, scores in kriterium_bewertungen.items():
         category = kriterium_name_kategorie_map[criterion_name]
         if category == "Code Kriterium":
@@ -391,7 +391,6 @@ def create_excel_table(
     ws.cell(row=last_row, column=2, value=extra_prompts_gesamt1)
     ws.cell(row=last_row, column=3, value=extra_prompts_gesamt2)
 
-    # Leerzeile + Preis
     last_row = ws.max_row + 2
     ws.cell(row=last_row, column=1, value="Preisgestaltung")
     ws.cell(
@@ -405,6 +404,20 @@ def create_excel_table(
         value=get_price_description(sekundäre_kriterien_werte2["werte"][-1]),
     )
 
+    # ➕ Neue Zeile: Open/Closed Source
+    last_row += 1
+    ws.cell(row=last_row, column=1, value="Open/Closed Source")
+    ws.cell(
+        row=last_row,
+        column=2,
+        value=get_openclosedsource_description(sekundäre_kriterien_werte1["werte"][-2]),
+    )
+    ws.cell(
+        row=last_row,
+        column=3,
+        value=get_openclosedsource_description(sekundäre_kriterien_werte2["werte"][-2]),
+    )
+
     wb.save(excel_filename)
     print(f"\n✅ Excel-Datei gespeichert als '{excel_filename}'")
 
@@ -416,5 +429,14 @@ def get_price_description(rating):
         return "Agent kostenlos, nur Zahlung nach API Key Nutzung"
     elif rating == 0:
         return "Festgelegter Preis pro Monat (inkl. Agent und API Key Nutzung)."
+    else:
+        return "Keine Angabe"
+
+
+def get_openclosedsource_description(rating):
+    if rating == 1:
+        return "open source"
+    elif rating == 0:
+        return "closed source"
     else:
         return "Keine Angabe"

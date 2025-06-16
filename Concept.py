@@ -97,11 +97,9 @@ zeichne_balkendiagramm(
 )
 zeichne_balkendiagramm(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
-    sekundäre_kriterien_werte["kriterium_name"][
-        :-1
-    ],  # Hier .pop() damit Preis nicht in dem Radar mit drinnen ist.
-    sekundäre_kriterien_werte["werte"][:-1],
-    sekundäre_kriterien_werte2["werte"][:-1],
+    sekundäre_kriterien_werte["kriterium_name"][:-2],
+    sekundäre_kriterien_werte["werte"][:-2],
+    sekundäre_kriterien_werte2["werte"][:-2],
     f"{agentenname}",
     f"{agentenname2}",
     datei_sek_kriterien,
