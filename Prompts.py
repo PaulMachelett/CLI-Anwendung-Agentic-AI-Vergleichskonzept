@@ -49,7 +49,9 @@ prompts_text = {
       - Datenbankmodelle in `myapp/models.py`
       - DB-Verbindung und Initialisierung in `myapp/db.py`
       - Hilfsfunktionen in `myapp/utils.py` (optional)
-      
+      - Weitere Ordner je nach Bedarf.
+
+        
     Die Datei `main.py`, die die Anwendung startet, soll nicht im `myapp/`-Ordner liegen, sondern auf der obersten Projektebene bleiben.
     Achte darauf, dass alle Importe korrekt funktionieren, das Projekt weiterhin ausführbar ist und keine Duplikate im Code vorhanden sind.
 
@@ -58,9 +60,10 @@ prompts_text = {
     "Prompt4": """
     "Prompt 4:
     
-    Schreibe Integrationstests mit pytest, die die REST-Endpunkte des Flask Backends über einen Test-Client testen. 
+    "Schreibe Integrationstests mit pytest, die die REST-Endpunkte des Flask Backends über einen Test-Client testen. 
     Teste Registrierung, Login, Notiz erstellen und Notizen abrufen – inklusive Erfolgs- und Fehlerfällen.
-    Die Datenbank soll dabei vollständig gemockt sein es erfolgt also kein echter Datenbankzugriff.
+    Die Datenbank soll dabei vollständig gemockt sein es erfolgt also kein echter Datenbankzugriff. Die Tests sollen alle ausführbar sein und funktionieren. 
+    Achte bei der Testerstellung auf die vorhandene Projektstuktur und lege die Tests in einem passenden Modul an.
     
     Führe anschließend die Tests aus."
     """,
@@ -96,7 +99,7 @@ prompts_text = {
 
     Prompt 8: 
     
-    "Führe die Tests aus und korrigiere im Falle von Testfehlschlägen die entsprechenden Fehlerursachen"
+    "Führe die Tests aus."
     """,
     "Prompt 9": """
     Prompt 9:
