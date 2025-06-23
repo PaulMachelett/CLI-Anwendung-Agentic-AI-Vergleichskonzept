@@ -20,7 +20,6 @@ def bewertungs_prozess(
     agentenname,
     sekundäre_kriterien_werte,
     agenten_werte,
-    code_kriterien_mittelwerte,
     autonomie_detail_werte,
 ):
     results = {}  # --- Speichert für jeden Prompt Kriterium, Kategorie sowie Bewertungs des Kriteriums ---
@@ -31,7 +30,7 @@ def bewertungs_prozess(
         prompt_text_key = prompt_mapping.get(prompt_key)
         prompt_text = prompts_text.get(prompt_text_key, "")
 
-        print(f"\nBeschreibung für: {prompt_key}\n\n\n{prompt_text.strip()}\n")
+        print(f"\nBeschreibung für: {prompt_key}\n\n{prompt_text.strip()}\n")
         print(f"\nBitte bewerte die folgenden Kriterien:\n")
 
         results[prompt_key] = []
@@ -88,8 +87,10 @@ def bewertungs_prozess(
                         )
                     )
                     if anzahl_extra_prompts >= 0:
-                        extra_prompts_gesamt += anzahl_extra_prompts
+                        extra_prompts_gesamt[0] += anzahl_extra_prompts
+                        print(f"{extra_prompts_gesamt[0]}")
                         break
+
                     else:
                         print("Bitte eine nicht-negative Zahl eingeben.")
                 except ValueError:
@@ -148,7 +149,6 @@ def bewertungs_prozess(
             if cont == "j":
                 break
             elif cont == "n":
-                prompt_abbruch = True
                 break
             else:
                 print("Falsche Eingabe. Bitte j für Ja oder n für Nein.")
@@ -158,7 +158,6 @@ def bewertungs_prozess(
     process_bewertungen(
         results,
         sekundäre_kriterien_werte,
-        code_kriterien_mittelwerte,
         agenten_werte,
         autonomie_detail_werte,
     )
@@ -167,7 +166,6 @@ def bewertungs_prozess(
 def process_bewertungen(
     results,
     sekundäre_kriterien_werte,
-    code_kriterien_mittelwerte,
     agenten_werte,
     autonomie_detail_werte,
 ):
@@ -242,11 +240,13 @@ def input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren):
         while True:
             try:
                 choice_input = input(
-                    "Bitte Nummer der Bewertung eingeben (oder Enter für keine Bewertung): "
+                    f"Bitte Nummer der Bewertung eingeben (1–{len(criterion['options'])}): "
                 )
                 if choice_input.strip() == "":
-                    score = None
-                    break
+                    print(
+                        "Leere Eingabe ist nicht erlaubt. Bitte eine gültige Zahl eingeben."
+                    )
+                    continue
                 choice = int(choice_input)
                 if 1 <= choice <= len(criterion["options"]):
                     if len(criterion["options"]) == 2:
@@ -256,50 +256,20 @@ def input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren):
                     elif len(criterion["options"]) == 4:
                         score = [1.0, 0.66, 0.33, 0.0][choice - 1]
                     else:
-                        score = 0.0
+                        score = 0.0  # Fallback bei ungewöhnlicher Optionenzahl
                     break
                 else:
-                    print("Ungültige Eingabe.")
+                    print(
+                        f"Ungültige Eingabe. Bitte eine Zahl zwischen 1 und {len(criterion['options'])} eingeben."
+                    )
             except ValueError:
-                print("Bitte eine gültige Zahl eingeben.")
+                print("Ungültige Eingabe. Bitte eine gültige Zahl eingeben.")
+
         print("\n" + "#" * 30 + "\n")
 
-        if score is not None:
-            sekundäre_kriterien_werte["kriterium_name"].append(criterion["name"])
-            sekundäre_kriterien_werte["werte"].append(score)
-
-
-def zeichne_radar(titel, kategorien, werte1, werte2, label1, label2, dateiname):
-    winkel = np.linspace(0, 2 * np.pi, len(kategorien), endpoint=False).tolist()
-
-    # Zyklisch schließen
-    werte1 += werte1[:1]
-    werte2 += werte2[:1]
-    winkel += winkel[:1]
-
-    fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
-
-    # Plot für erste Instanz
-    ax.plot(winkel, werte1, marker="o", label=label1)
-    ax.fill(winkel, werte1, alpha=0.25)
-
-    # Plot für zweite Instanz
-    ax.plot(winkel, werte2, marker="s", label=label2)
-    ax.fill(winkel, werte2, alpha=0.25)
-
-    # Achsentitel etc.
-    ax.set_title(titel, size=14, y=1.1)
-    ax.set_xticks(winkel[:-1])
-    ax.set_xticklabels(kategorien)
-    ax.set_yticks([0.2, 0.4, 0.6, 0.8])
-    ax.set_yticklabels(["0.2", "0.4", "0.6", "0.8"])
-    ax.set_ylim(0, 1)
-
-    # Legende & Layout
-    ax.legend(loc="upper right", bbox_to_anchor=(1.3, 1.1))
-    plt.tight_layout()
-    plt.savefig(dateiname)
-    plt.close()
+        # Bewertung speichern
+        sekundäre_kriterien_werte["kriterium_name"].append(criterion["name"])
+        sekundäre_kriterien_werte["werte"].append(score)
 
 
 def zeichne_balkendiagramm(

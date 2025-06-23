@@ -2,7 +2,6 @@ import sys
 from collections import defaultdict
 from Data import agenten_kategorien, autonomie_quellen, einleitung
 from utils import (
-    zeichne_radar,
     zeichne_balkendiagramm,
     bewertungs_prozess,
     create_excel_table,
@@ -16,22 +15,18 @@ agentenname2 = input("Bitte gib den Namen des zweiten Agenten ein: ").strip()
 
 # Name für die die Dateien später
 agenten_slug = agentenname.strip().lower().replace(" ", "_")
-agenten_slug2 = agentenname.strip().lower().replace(" ", "_")
+agenten_slug2 = agentenname2.strip().lower().replace(" ", "_")
 
 # Speichert Kriterium mit Bewertungsantwort ab.
 kriterien_textantworten = {}
 kriterien_textantworten2 = {}
 
-extra_prompts_gesamt = 0
-extra_prompts_gesamt2 = 0
+extra_prompts_gesamt = [0]
+extra_prompts_gesamt2 = [0]
 
 # --- Speichert die Bewertungen der sekundären Kriterien ---
 sekundäre_kriterien_werte = defaultdict(list)
 sekundäre_kriterien_werte2 = defaultdict(list)
-
-# --- Speichert Mittelwerte sowie SonarQube Einträge.
-code_kriterien_mittelwerte = {}  # Muss da bleiben
-code_kriterien_mittelwerte2 = {}
 
 agenten_werte = []  # Muss da bleiben
 agenten_werte2 = []
@@ -55,8 +50,11 @@ bewertungs_prozess(
     agentenname,
     sekundäre_kriterien_werte,
     agenten_werte,
-    code_kriterien_mittelwerte,
     autonomie_detail_werte,
+)
+
+print(
+    f"\n\nAnzahl der gesamgten Prompts von Agent {agentenname}: {extra_prompts_gesamt[0]}"
 )
 
 bewertungs_prozess(
@@ -65,16 +63,15 @@ bewertungs_prozess(
     agentenname2,
     sekundäre_kriterien_werte2,
     agenten_werte2,
-    code_kriterien_mittelwerte2,
     autonomie_detail_werte2,
 )
 
 
 # Radar-Grafiken speichern
 # Datei-Namen dynamisch auf Basis des Agentennamens
-datei_eigenschaften = f"{agenten_slug}_eigenschaften.png"
-datei_autonomie = f"{agenten_slug}_autonomie.png"
-datei_sek_kriterien = f"{agenten_slug}_sek_faktoren.png"
+datei_eigenschaften = f"{agenten_slug}_{agenten_slug2}_eigenschaften.png"
+datei_autonomie = f"{agenten_slug}_{agenten_slug2}_autonomie.png"
+datei_sek_kriterien = f"{agenten_slug}_{agenten_slug2}_sek_faktoren.png"
 
 # Radar-Grafiken speichern
 zeichne_balkendiagramm(
@@ -106,32 +103,16 @@ zeichne_balkendiagramm(
 )
 
 print(
-    f"\nRadar-Diagramme wurden gespeichert als '{datei_eigenschaften}' und '{datei_autonomie}' für Agent: {agentenname}"
+    f"\nRadar-Diagramme wurden gespeichert als '{datei_eigenschaften}' und '{datei_autonomie}' für Agent: {agentenname} und {agentenname2}"
 )
 # --- Excel-Datei mit Bewertungstexten erstellen ---
 create_excel_table(
     kriterien_textantworten,
     agenten_slug,
-    extra_prompts_gesamt,
+    extra_prompts_gesamt[0],
     sekundäre_kriterien_werte,
     kriterien_textantworten2,
     agenten_slug2,
-    extra_prompts_gesamt2,
+    extra_prompts_gesamt2[0],
     sekundäre_kriterien_werte2,
 )
-
-
-print(f"\nkriterien_textantworten: {kriterien_textantworten}")
-print(f"\nagenten_slug: {agenten_slug}")
-print(f"\nextra_prompts_gesamt: {extra_prompts_gesamt}")
-print(f"\ncode_kriterien_mittelwerte: {code_kriterien_mittelwerte}")
-print(f"\nagentenname: {agentenname}")
-print(f"\nsekundäre_kriterien_werte: {sekundäre_kriterien_werte}")
-print(f"\ndatei_sek_kriterien: {datei_sek_kriterien}")
-print(f"\ndatei_autonomie: {datei_autonomie}")
-print(f"\nautonomie_detail_werte: {autonomie_detail_werte}")
-print(f"\ndatei_eigenschaften: {datei_eigenschaften}")
-print(f"\nagenten_werte: {agenten_werte}")
-print(f"\nkategorien: {agenten_kategorien}")
-
-# DIESE MUSS ICH NOCH IN EIN TEST FILE ÜBERFÜHREN, DAMIT ICH DIE SOFTWARE TESTEN KANN
