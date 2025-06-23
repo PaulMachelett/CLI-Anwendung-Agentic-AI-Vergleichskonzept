@@ -118,7 +118,7 @@ kriterien_textantworten2 = {
 
 agenten_slug2 = "aider"
 
-extra_prompts_gesamt2 = 1
+extra_prompts_gesamt2 = 7
 
 agentenname2 = "Agent2"
 
