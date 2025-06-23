@@ -40,12 +40,6 @@ prompts = {
     ],
     "Datenbanklogik": [
         {
-            "name": "Dependency-Handling",
-            "description": "Konnte der Agent erneut fehlende Libraries installieren?",
-            "options": ["Installiert", "Nicht installiert"],
-            "category": "Pro-Aktivität",
-        },
-        {
             "name": "Selbsterklärbarkeit",
             "description": "Gibt er verständliche Begründungen für sein Vorgehen?",
             "options": [
@@ -99,12 +93,6 @@ prompts = {
             ],
             "category": "Coding Practices",
         },
-        {
-            "name": "Modularitätsverständnis",
-            "description": "Wurde neuer Code richtig in Modularität implementiert?",
-            "options": ["Im richtigen Modul", "Im falschen Modul"],
-            "category": "Coding Practices",
-        },
     ],
     "Manuelle Änderungen des Codes": [
         {
@@ -141,10 +129,10 @@ prompts = {
             "category": "Coding Practices",
         },
         {
-            "name": "Automatische Testfallgenerierung",
-            "description": "Hat der Agent neue Test erstellt wenn für bereits getestete Bereiche neue Funktionen eingefügt wurden?",
-            "options": ["Hat neue Tests erstellt.", "Hat keine neuen Tests erstellt."],
-            "category": "Coding Practices",
+            "name": "Lernfähigkeit Tests",
+            "description": "Hat der Agent wie angewiesen für neue Routen Tests erstellt?",
+            "options": ["Ja", "Nein"],
+            "category": "Lernfähigkeit",
         },
     ],
     "Refactoring": [

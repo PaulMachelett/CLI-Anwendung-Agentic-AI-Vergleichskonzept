@@ -62,8 +62,12 @@ prompts_text = {
     
     "Schreibe Integrationstests mit pytest, die die REST-Endpunkte des Flask Backends über einen Test-Client testen. 
     Teste Registrierung, Login, Notiz erstellen und Notizen abrufen – inklusive Erfolgs- und Fehlerfällen.
-    Die Datenbank soll dabei vollständig gemockt sein es erfolgt also kein echter Datenbankzugriff. Die Tests sollen alle ausführbar sein und funktionieren. 
+    Die Datenbank soll dabei vollständig gemockt sein es erfolgt also kein echter Datenbankzugriff. 
+    Die Tests sollen alle ausführbar sein und funktionieren. 
+    
     Achte bei der Testerstellung auf die vorhandene Projektstuktur und lege die Tests in einem passenden Modul an.
+    
+    Zusätzlich will ich das du nun für jede neue Route die du hinzufügst neue Tests erstellst, die die entsprechende Route testen.
     
     Führe anschließend die Tests aus."
     """,
