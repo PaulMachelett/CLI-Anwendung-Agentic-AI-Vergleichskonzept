@@ -21,8 +21,10 @@ def bewertungs_prozess(
     sekundäre_kriterien_werte,
     agenten_werte,
     autonomie_detail_werte,
+    code_kriterien_wert,
 ):
     results = {}  # --- Speichert für jeden Prompt Kriterium, Kategorie sowie Bewertungs des Kriteriums ---
+    code_kriterien_werte = {"Ausführbarer Code": 0, "Anforderungserfüllung": 0}
 
     print(f"\nBewertung des Agenten: {agentenname}\n")
 
@@ -131,13 +133,20 @@ def bewertungs_prozess(
                         print("Bitte eine gültige Zahl eingeben.")
 
                 if score is not None:
-                    results[prompt_key].append(
-                        {
-                            "name": criterion["name"],
-                            "category": criterion["category"],
-                            "score": score,
-                        }
-                    )
+                    if criterion["name"] in [
+                        "Ausführbarer Code",
+                        "Anforderungserfüllung",
+                    ]:
+                        code_kriterien_werte[criterion["name"]] += score
+
+                    else:
+                        results[prompt_key].append(
+                            {
+                                "name": criterion["name"],
+                                "category": criterion["category"],
+                                "score": score,
+                            }
+                        )
 
         # Eingabe zur Fortsetzung
         while True:
@@ -160,6 +169,8 @@ def bewertungs_prozess(
         sekundäre_kriterien_werte,
         agenten_werte,
         autonomie_detail_werte,
+        code_kriterien_werte,
+        code_kriterien_wert,
     )
 
 
@@ -168,6 +179,8 @@ def process_bewertungen(
     sekundäre_kriterien_werte,
     agenten_werte,
     autonomie_detail_werte,
+    code_kriterien_werte,
+    code_kriterien_wert,
 ):
     # Speichert als Key Kriterienname und als Value eine Liste mit allen Bewertungen dieses Kriteriums
     kriterium_bewertungen = defaultdict(list)
@@ -226,6 +239,9 @@ def process_bewertungen(
         wert = sum(werte) / len(werte) if werte else 0
         autonomie_detail_werte.append(wert)
 
+    berechne_code_kriterien_mittelwert(code_kriterien_werte, code_kriterien_wert)
+    print(f"code_kriterium_wert: {code_kriterien_wert}")
+
 
 def input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren):
     print("\n\nBewertung der sekundären Kriterien\n\n")
@@ -272,6 +288,15 @@ def input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren):
         sekundäre_kriterien_werte["werte"].append(score)
 
 
+def berechne_code_kriterien_mittelwert(code_kriterien_werte, code_kriterien_wert):
+    for key, wert in code_kriterien_werte.items():
+        if wert:  # Nur wenn Liste nicht leer ist
+            prozent_zahl = wert / 11  # 11 ist die Prompt Anzahl
+            code_kriterien_wert[key] = prozent_zahl
+        else:
+            code_kriterien_wert[key] = 0  # Optional: None für leere Listen
+
+
 def zeichne_balkendiagramm(
     titel, kategorien, werte1, werte2, label1, label2, dateiname
 ):
@@ -315,10 +340,12 @@ def create_excel_table(
     agenten_slug1,
     extra_prompts_gesamt1,
     sekundäre_kriterien_werte1,
+    code_kriterien_wert1,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2,
     sekundäre_kriterien_werte2,
+    code_kriterien_wert2,
 ):
     # --- Falls Slugs gleich sind, umbenennen zur Sicherheit ---
     if agenten_slug1 == agenten_slug2:
@@ -361,6 +388,32 @@ def create_excel_table(
     ws.cell(row=last_row, column=2, value=extra_prompts_gesamt1)
     ws.cell(row=last_row, column=3, value=extra_prompts_gesamt2)
 
+    # Neue Zeile: Ausführbarer Code und Anforderungserfüllung
+    last_row += 2
+    ws.cell(row=last_row, column=1, value="Ausführbarer Code")
+    ws.cell(
+        row=last_row,
+        column=2,
+        value=f"{code_kriterien_wert1['Ausführbarer Code'] * 100:.0f} %",
+    )
+    ws.cell(
+        row=last_row,
+        column=3,
+        value=f"{code_kriterien_wert2['Ausführbarer Code'] * 100:.0f} %",
+    )
+    last_row += 1
+    ws.cell(row=last_row, column=1, value="Anforderungserfüllung")
+    ws.cell(
+        row=last_row,
+        column=2,
+        value=f"{code_kriterien_wert1['Anforderungserfüllung'] * 100:.0f} %",
+    )
+    ws.cell(
+        row=last_row,
+        column=3,
+        value=f"{code_kriterien_wert2['Anforderungserfüllung'] * 100:.0f} %",
+    )
+
     last_row = ws.max_row + 2
     ws.cell(row=last_row, column=1, value="Preisgestaltung")
     ws.cell(
@@ -374,7 +427,7 @@ def create_excel_table(
         value=get_price_description(sekundäre_kriterien_werte2["werte"][-1]),
     )
 
-    # ➕ Neue Zeile: Open/Closed Source
+    # Neue Zeile: Open/Closed Source
     last_row += 1
     ws.cell(row=last_row, column=1, value="Open/Closed Source")
     ws.cell(

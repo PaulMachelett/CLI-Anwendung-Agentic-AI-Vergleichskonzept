@@ -81,6 +81,9 @@ agenten_werte = [
     0.7,
 ]
 
+code_kriterien_wert1 = {"Ausführbarer Code": 0.5, "Anforderungserfüllung": 0.33}
+code_kriterien_wert2 = {"Ausführbarer Code": 0.4, "Anforderungserfüllung": 0.22}
+
 
 kriterien_textantworten2 = {
     "Dependency-Handling": "Ist nicht in der Lage fehlende Libraries zu installieren.",
@@ -185,8 +188,10 @@ create_excel_table(
     agenten_slug,
     extra_prompts_gesamt,
     sekundäre_kriterien_werte,
+    code_kriterien_wert1,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2,
     sekundäre_kriterien_werte2,
+    code_kriterien_wert2,
 )

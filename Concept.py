@@ -24,23 +24,18 @@ kriterien_textantworten2 = {}
 extra_prompts_gesamt = [0]
 extra_prompts_gesamt2 = [0]
 
+code_kriterien_wert = {}
+code_kriterien_wert2 = {}
+
 # --- Speichert die Bewertungen der sekundären Kriterien ---
 sekundäre_kriterien_werte = defaultdict(list)
 sekundäre_kriterien_werte2 = defaultdict(list)
 
-agenten_werte = []  # Muss da bleiben
+agenten_werte = []
 agenten_werte2 = []
 
-autonomie_detail_werte = []  # Muss da bleiben
+autonomie_detail_werte = []
 autonomie_detail_werte2 = []
-
-# # --- Speichert alle Katgorien ohne Duplikate ab ---
-# all_categories = set(
-#     criterion["category"] for criteria in prompts.values() for criterion in criteria
-# )
-
-# # --- Fügt Kategorien aus den immer gefragten Kriterien hinzu ---
-# all_categories.update(c["category"] for c in always_asked_criteria)
 
 
 # Bewertungsprozess
@@ -51,10 +46,7 @@ bewertungs_prozess(
     sekundäre_kriterien_werte,
     agenten_werte,
     autonomie_detail_werte,
-)
-
-print(
-    f"\n\nAnzahl der gesamgten Prompts von Agent {agentenname}: {extra_prompts_gesamt[0]}"
+    code_kriterien_wert,
 )
 
 bewertungs_prozess(
@@ -64,6 +56,7 @@ bewertungs_prozess(
     sekundäre_kriterien_werte2,
     agenten_werte2,
     autonomie_detail_werte2,
+    code_kriterien_wert2,
 )
 
 
@@ -111,8 +104,10 @@ create_excel_table(
     agenten_slug,
     extra_prompts_gesamt[0],
     sekundäre_kriterien_werte,
+    code_kriterien_wert,
     kriterien_textantworten2,
     agenten_slug2,
     extra_prompts_gesamt2[0],
     sekundäre_kriterien_werte2,
+    code_kriterien_wert2,
 )
