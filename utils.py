@@ -23,7 +23,7 @@ def bewertungs_prozess(
     autonomie_detail_werte,
     code_kriterien_wert,
 ):
-    results = {}  # --- Speichert für jeden Prompt Kriterium, Kategorie sowie Bewertungs des Kriteriums ---
+    results = {}  # Speichert für jeden Prompt Kriterium, Kategorie sowie Bewertungs des Kriteriums
     code_kriterien_werte = {"Ausführbarer Code": 0, "Anforderungserfüllung": 0}
 
     print(f"\nBewertung des Agenten: {agentenname}\n")
@@ -79,7 +79,7 @@ def bewertungs_prozess(
             if criterion["name"] not in kriterien_textantworten:
                 kriterien_textantworten[criterion["name"]] = bewertungstext
 
-        # Frage nach Anzahl extra Prompts – außer bei Agenten Features
+        # Anzahl extra Prompts
         if prompt_key != "Agenten Features":
             while True:
                 try:
@@ -98,7 +98,7 @@ def bewertungs_prozess(
                 except ValueError:
                     print("Ungültige Eingabe. Bitte eine Zahl eingeben.")
 
-        # 👇 Hier: Nur wenn NICHT "Agenten Features" → Immer-gefragt-Kriterien abfragen
+        # Immer-gefragt-Kriterien
         if prompt_key != "Agenten Features":
             for idx, criterion in enumerate(always_asked_criteria):
                 print("\n" + "#" * 30 + "\n")
@@ -110,12 +110,25 @@ def bewertungs_prozess(
 
                 while True:
                     try:
-                        choice_input = input(
-                            "Bitte Nummer der Bewertung eingeben (oder Enter für keine Bewertung): "
-                        )
-                        if choice_input.strip() == "":
-                            score = None
-                            break
+                        if criterion["name"] in [
+                            "Ausführbarer Code",
+                            "Anforderungserfüllung",
+                        ]:
+                            choice_input = input(
+                                "Bitte Nummer der Bewertung eingeben: "
+                            ).strip()
+                            if choice_input == "":
+                                print(
+                                    "Für dieses Kriterium ist eine Bewertung erforderlich."
+                                )
+                                continue
+                        else:
+                            choice_input = input(
+                                "Bitte Nummer der Bewertung eingeben (oder Enter für keine Bewertung): "
+                            ).strip()
+                            if choice_input == "":
+                                score = None
+                                break
                         choice = int(choice_input)
                         if 1 <= choice <= len(criterion["options"]):
                             if len(criterion["options"]) == 2:
@@ -185,8 +198,8 @@ def process_bewertungen(
     # Speichert als Key Kriterienname und als Value eine Liste mit allen Bewertungen dieses Kriteriums
     kriterium_bewertungen = defaultdict(list)
 
-    # --- Speichert alle Mittelwerte der Kriterien einer Kategorie, WICHTIG nicht die Mittelwerte der Kategorie, das kommt erst später ---
-    # --- Sprich dieses Dict enthält als Key die Kategorie und dann dann als Value eine Liste mit allen Mittelwerten der Kriterien dieser Kategorie ---
+    # Speichert alle Mittelwerte der Kriterien einer Kategorie, WICHTIG nicht die Mittelwerte der Kategorie, das kommt erst später ---
+    # Sprich dieses Dict enthält als Key die Kategorie und dann dann als Value eine Liste mit allen Mittelwerten der Kriterien dieser Kategorie ---
     kriterien_mittelwerte_per_katergorie = defaultdict(list)
 
     # Speichert für jedes Kriterium(key) die Kategorie(value)
@@ -199,7 +212,7 @@ def process_bewertungen(
             kriterium_bewertungen[key].append(criterion["score"])
             kriterium_name_kategorie_map[key] = criterion["category"]
 
-    # --- Fragt sekunäre Kriterien ab und speichert diese in "sekundäre_kriterien_werte"
+    # Fragt sekunäre Kriterien ab und speichert diese in "sekundäre_kriterien_werte"
     input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren)
 
     # Kategorie-Mittelwerte berechnen
