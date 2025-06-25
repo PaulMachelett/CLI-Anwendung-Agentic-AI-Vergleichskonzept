@@ -85,7 +85,7 @@ prompts = {
     "Tests erstellen": [
         {
             "name": "Testfallgenerierung",
-            "description": "Hat der Agent automatisch funktionsabdeckene Tests erstellt?",
+            "description": "Hat der Agent funktionsabdeckene Tests erstellt?",
             "options": [
                 "Hat funktionsabdeckende Tests erstellt",
                 "Hat größtenteils funktionsabdeckende Tests erstellt",
@@ -137,7 +137,7 @@ prompts = {
     ],
     "Refactoring": [
         {
-            "name": "Refactoring",
+            "name": "Kontextuelles Refactoring",
             "description": "Wurden Umbenennungen konsistent im Projekt durchgeführt?",
             "options": [
                 "Alles korrekt umbenannt",
@@ -147,7 +147,7 @@ prompts = {
             "category": "Coding Practices",
         },
         {
-            "name": "Testsausführung nach Änderungen von testabgedeckten Codes",
+            "name": "Automatische Ausführung der Tests bei Änderung",
             "description": "Wurden nach Änderungen automatisch Tests ausgeführt?",
             "options": ["Ja", "Nein"],
             "category": "Pro-Aktivität",
@@ -164,7 +164,7 @@ prompts = {
     ],
     "Test Benutzung": [
         {
-            "name": "Reaktion auf Testfehlschlag",
+            "name": "Fehlerbehebung bei Fehlschlag von Tests",
             "description": "Wie hat der Agent auf fehlschlagende Tests reagiert?",
             "options": [
                 "Hat Code korrigiert.",
@@ -305,10 +305,10 @@ always_asked_criteria = [
         "name": "Fehlerbehebungskompetenz",
         "description": "Hat der Agent es geschafft einen auftretenden Fehler oder die fehlenden Anforderungen (mit zusätzlichen Prompts (max. 3)) zu beheben?",
         "options": [
-            "Konnte den auftretenden Fehler korrigieren oder Anforderungen umsetzten.",
+            "Konnte den auftretenden Fehler korrigieren oder Anforderungen umsetzten.f",
             "Hat es nicht geschafft einen auftretenden Fehler zu korrigieren oder Anforderungen umzusetzten..",
         ],
-        "category": "Pro-Aktivität",
+        "category": "Reaktivität",
     },
     {
         "name": "Verhaltensadaptivität",
