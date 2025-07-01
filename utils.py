@@ -57,7 +57,6 @@ def bewertungs_prozess(
                             score = 1.0 if choice == 1 else 0.0
                         elif len(criterion["options"]) == 3:
                             score = [1.0, 0.5, 0.0][choice - 1]
-                            print(score)
                         elif len(criterion["options"]) == 4:
                             score = [1.0, 0.66, 0.33, 0.0][choice - 1]
                         else:
@@ -253,7 +252,6 @@ def process_bewertungen(
         autonomie_detail_werte.append(wert)
 
     berechne_code_kriterien_mittelwert(code_kriterien_werte, code_kriterien_wert)
-    print(f"code_kriterium_wert: {code_kriterien_wert}")
 
 
 def input_sek_kriterien(sekundäre_kriterien_werte, sekundäre_faktoren):
