@@ -103,7 +103,7 @@ prompts_text = {
 
     Prompt 8: 
     
-    "Führe die Tests aus und korrigiere alle auftretenden Fehler."
+    "Führe die Tests aus."
     """,
     "Prompt 9": """
     Prompt 9:

@@ -303,10 +303,10 @@ always_asked_criteria = [
     },
     {
         "name": "Fehlerbehebungskompetenz",
-        "description": "Hat der Agent es geschafft einen auftretenden Fehler oder die fehlenden Anforderungen (mit zusätzlichen Prompts (max. 3)) zu beheben?",
+        "description": "Hat der Agent es geschafft einen auftretenden Fehler oder die fehlenden Anforderungen (mit zusätzlichen Prompts, max. 3) zu beheben?",
         "options": [
-            "Konnte den auftretenden Fehler korrigieren oder Anforderungen umsetzten.f",
-            "Hat es nicht geschafft einen auftretenden Fehler zu korrigieren oder Anforderungen umzusetzten..",
+            "Konnte den auftretenden Fehler korrigieren oder Anforderungen umsetzten.",
+            "Hat es nicht geschafft einen auftretenden Fehler zu korrigieren oder Anforderungen umzusetzten.",
         ],
         "category": "Reaktivität",
     },
