@@ -99,7 +99,7 @@ prompts_text = {
     "Prompt 8": """
     Manuelle Änderungen:
     Führe Änderungen durch, die die Software starten lassen würden, aber die Tests fehlschlagen lassen. 
-    Beispiel: API Route abändern und aus "notes/<int:note_id>" => "notes/<int:note_i>" machen.
+    Beispiel: API Route abändern und aus "register" => "registe" machen.
 
     Prompt 8: 
     
@@ -108,7 +108,8 @@ prompts_text = {
     "Prompt 9": """
     Prompt 9:
     
-    "Schreibe nun eine Funktion, die bestimmte Daten aus der Datenbank abruft und als Text in einer Datei abspeichert. Schreibe in einem kurzen Kommentar über der Funktion was diese macht.
+    "Schreibe nun eine Funktion, die bestimmte Daten aus der Datenbank abruft und als Text in einer Datei abspeichert. Schreibe in einem kurzen Kommentar für diese Funktion,
+    in dem du erklärst, was diese Funktion macht.
 
     Führe den Code anschließend aus."
     """,
