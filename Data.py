@@ -187,7 +187,7 @@ prompts = {
         },
         {
             "name": "Lernfähigkeit aus User Feedback",
-            "description": "Hat der Agent aus Feedback gelernt? (Kommentare auf Deutsch oder Französisch?)",
+            "description": "Hat der Agent aus Feedback gelernt? (Kommentare auf Französisch?)",
             "options": ["Ja", "Nein"],
             "category": "Lernfähigkeit",
         },
@@ -249,9 +249,9 @@ prompts = {
         },
         {
             "name": "Dokumentation",
-            "description": "Hat der Agent Dokumentation, Docstrings, README-Dateien oder API-Beschreibungen erstellt?",
+            "description": "Hat der Agent Dokumentation, README-Dateien oder API-Beschreibungen erstellt?",
             "options": [
-                "Hat Dokumentation, Docstrings, README-Dateien und API-Beschreibungen erstellt.",
+                "Hat Dokumentation, README-Dateien und API-Beschreibungen erstellt.",
                 "Hat Code kommentiert, aber keine weiteren Dokumentationen erstellt.",
                 "Hat keine Form von Dokumentation erstellt.",
             ],
@@ -268,7 +268,7 @@ prompts = {
             "description": "Hat der Coding Agent ein User Interface oder muss er in der Konsole bedient werden?",
             "options": [
                 "Besitzt ein Interface, Online oder innerhalb einer IDE",
-                "Nur Zugriff",
+                "Kann nur über die Konsole bedient werden.",
             ],
             "category": "Systemintegration",
         },
