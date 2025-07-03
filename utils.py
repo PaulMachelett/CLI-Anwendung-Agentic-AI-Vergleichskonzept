@@ -89,7 +89,6 @@ def bewertungs_prozess(
                     )
                     if anzahl_extra_prompts >= 0:
                         extra_prompts_gesamt[0] += anzahl_extra_prompts
-                        print(f"{extra_prompts_gesamt[0]}")
                         break
 
                     else:
@@ -381,7 +380,7 @@ def create_excel_table(
     df_final = pd.concat([df, df_empty], ignore_index=True)
 
     # --- Excel-Datei schreiben ---
-    excel_filename = f"{agenten_slug1}_vs_{agenten_slug2}_kriterien_inkl_code.xlsx"
+    excel_filename = f"{agenten_slug1}_vs_{agenten_slug2}_kriterien.xlsx"
     df_final.to_excel(excel_filename, index=False)
 
     # --- Openpyxl für Feinschliff ---
