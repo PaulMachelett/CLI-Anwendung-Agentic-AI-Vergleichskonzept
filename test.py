@@ -173,9 +173,7 @@ zeichne_diagramm(
 )
 zeichne_diagramm(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
-    sekundäre_kriterien_werte["kriterium_name"][
-        :-2
-    ],  # Hier .pop() damit Preis nicht in dem Radar mit drinnen ist.
+    sekundäre_kriterien_werte["kriterium_name"][:-2],
     sekundäre_kriterien_werte["werte"][:-2],
     sekundäre_kriterien_werte2["werte"][:-2],
     f"{agentenname}",

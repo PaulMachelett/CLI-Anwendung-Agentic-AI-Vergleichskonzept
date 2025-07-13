@@ -307,7 +307,7 @@ def berechne_code_kriterien_mittelwert(code_kriterien_werte, code_kriterien_wert
             code_kriterien_wert[key] = 0  # Optional: None für leere Listen
 
 
-def zeichne_balkendiagramm(
+def zeichne_diagramm(
     titel, kategorien, werte1, werte2, label1, label2, dateiname
 ):
     x = np.arange(len(kategorien))
@@ -315,8 +315,8 @@ def zeichne_balkendiagramm(
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    balken1 = ax.bar(x - breite / 2, werte1, breite, label=label1)
-    balken2 = ax.bar(x + breite / 2, werte2, breite, label=label2)
+    saeule1 = ax.bar(x - breite / 2, werte1, breite, label=label1)
+    saeule2 = ax.bar(x + breite / 2, werte2, breite, label=label2)
 
     ax.set_title(titel, fontsize=14, y=1.05)
     ax.set_xlabel("Kategorien")
@@ -328,7 +328,7 @@ def zeichne_balkendiagramm(
     ax.set_ylim(0, 1)
     ax.legend()
 
-    for bars in [balken1, balken2]:
+    for bars in [saeule1, saeule2]:
         for bar in bars:
             yval = bar.get_height()
             ax.text(

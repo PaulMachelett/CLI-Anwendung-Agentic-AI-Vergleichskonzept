@@ -64,7 +64,7 @@ datei_eigenschaften = f"{agenten_slug}_{agenten_slug2}_eigenschaften.png"
 datei_autonomie = f"{agenten_slug}_{agenten_slug2}_autonomie.png"
 datei_sek_kriterien = f"{agenten_slug}_{agenten_slug2}_sek_faktoren.png"
 
-# Radar-Grafiken speichern
+# Grafiken speichern
 zeichne_diagramm(
     f"{agentenname} & {agentenname2} Eigenschaften",
     agenten_kategorien,
