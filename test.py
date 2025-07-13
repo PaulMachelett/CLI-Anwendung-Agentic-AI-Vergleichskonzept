@@ -1,4 +1,4 @@
-from utils import create_excel_table, zeichne_balkendiagramm
+from utils import create_excel_table, zeichne_diagramm
 from collections import defaultdict
 from Data import agenten_kategorien, autonomie_quellen
 
@@ -153,7 +153,7 @@ agenten_werte2 = [
     0.7,
 ]
 
-zeichne_balkendiagramm(
+zeichne_diagramm(
     f"{agentenname} & {agentenname2} Eigenschaften",
     agenten_kategorien,
     agenten_werte.copy(),
@@ -162,7 +162,7 @@ zeichne_balkendiagramm(
     f"{agentenname2}",
     datei_eigenschaften,
 )
-zeichne_balkendiagramm(
+zeichne_diagramm(
     f"{agentenname} & {agentenname2} Autonomie",
     autonomie_quellen,
     autonomie_detail_werte.copy(),
@@ -171,7 +171,7 @@ zeichne_balkendiagramm(
     f"{agentenname2}",
     datei_autonomie,
 )
-zeichne_balkendiagramm(
+zeichne_diagramm(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
     sekundäre_kriterien_werte["kriterium_name"][
         :-2
