@@ -2,7 +2,7 @@ import sys
 from collections import defaultdict
 from Data import agenten_kategorien, autonomie_quellen, einleitung
 from utils import (
-    zeichne_balkendiagramm,
+    zeichne_diagramm,
     bewertungs_prozess,
     create_excel_table,
 )
@@ -59,15 +59,13 @@ bewertungs_prozess(
     code_kriterien_wert2,
 )
 
-
-# Radar-Grafiken speichern
 # Datei-Namen dynamisch auf Basis des Agentennamens
 datei_eigenschaften = f"{agenten_slug}_{agenten_slug2}_eigenschaften.png"
 datei_autonomie = f"{agenten_slug}_{agenten_slug2}_autonomie.png"
 datei_sek_kriterien = f"{agenten_slug}_{agenten_slug2}_sek_faktoren.png"
 
 # Radar-Grafiken speichern
-zeichne_balkendiagramm(
+zeichne_diagramm(
     f"{agentenname} & {agentenname2} Eigenschaften",
     agenten_kategorien,
     agenten_werte.copy(),
@@ -76,7 +74,7 @@ zeichne_balkendiagramm(
     f"{agentenname2}",
     datei_eigenschaften,
 )
-zeichne_balkendiagramm(
+zeichne_diagramm(
     f"{agentenname} & {agentenname2} Autonomie",
     autonomie_quellen,
     autonomie_detail_werte.copy(),
@@ -85,7 +83,7 @@ zeichne_balkendiagramm(
     f"{agentenname2}",
     datei_autonomie,
 )
-zeichne_balkendiagramm(
+zeichne_diagramm(
     f"{agentenname} & {agentenname2} sekundäre Kriterien",
     sekundäre_kriterien_werte["kriterium_name"][:-2],
     sekundäre_kriterien_werte["werte"][:-2],
