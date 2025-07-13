@@ -94,7 +94,7 @@ zeichne_diagramm(
 )
 
 print(
-    f"\nRadar-Diagramme wurden gespeichert als '{datei_eigenschaften}' und '{datei_autonomie}' für Agent: {agentenname} und {agentenname2}"
+    f"\nDiagramme wurden gespeichert als '{datei_eigenschaften}' und '{datei_autonomie}' für Agent: {agentenname} und {agentenname2}"
 )
 # --- Excel-Datei mit Bewertungstexten erstellen ---
 create_excel_table(
